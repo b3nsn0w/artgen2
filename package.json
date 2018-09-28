@@ -1,0 +1,48 @@
+{
+  "name": "artgen",
+  "version": "0.1.0",
+  "description": "You see, the deconstruction is inextricable from not only the text, but also the self",
+  "main": "src/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "webpack --mode production --progress --devtool hidden-source-map",
+    "dev-build": "webpack --mode development --progress --devtool source-map",
+    "dev-watch": "webpack --mode development --progress --watch --devtool source-map",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b3nsn0w/artgen2.git"
+  },
+  "keywords": [
+    "art"
+  ],
+  "author": "Ben Snow <balintbence97@gmail.com>",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/b3nsn0w/artgen2/issues"
+  },
+  "homepage": "https://github.com/b3nsn0w/artgen2#readme",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "json-stable-stringify": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
+  }
+}
