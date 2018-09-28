@@ -6,8 +6,9 @@ _Artgen 2: Inception_ is a continuation of the [modern art generator](https://b3
 
 - [x] deterministic random generator
 - [x] palette generator
-- [ ] shape generator
-- [ ] shape rendering
+- [x] shape generator
+  - [ ] more shapes
+- [x] shape rendering
 - [ ] art fractal
 - [ ] a million other things
 - [x] webpack setup
