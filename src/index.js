@@ -12,6 +12,7 @@ const context = canvas.getContext('2d')
 const uiContainer = document.querySelector('#ui-container')
 
 const pos = { x: 0, y: 0 }
+const zoom = { level: 1, step: 2 }
 
 function updateArt () {
   const generator = random(input.value)
@@ -33,8 +34,9 @@ function updateArt () {
     canvas,
     context,
     origin: { x: midpoint.x + pos.x, y: midpoint.y + pos.y },
-    scale: Math.min(w, h) * 2,
-    palette: artPalette
+    scale: Math.min(w, h),
+    palette: artPalette,
+    zoom: zoom.level
   })
 }
 
@@ -52,6 +54,7 @@ uiContainer.addEventListener('mousedown', (event) => {
   mouse.x = event.clientX
   mouse.y = event.clientY
   dragging = true
+  uiContainer.style.cursor = 'grabbing'
 
   event.preventDefault()
 })
@@ -73,8 +76,16 @@ uiContainer.addEventListener('mousemove', (event) => {
 
 uiContainer.addEventListener('mouseup', (event) => {
   dragging = false
+  uiContainer.style.cursor = ''
 })
 
 uiContainer.addEventListener('mouseleave', (event) => {
   dragging = false
+  uiContainer.style.cursor = ''
+})
+
+uiContainer.addEventListener('wheel', (event) => {
+  const zoomScale = Math.min(canvas.width, canvas.height) / 2
+  zoom.level += -event.deltaY * [1, 12, 200][event.deltaMode] / zoomScale
+  updateArt()
 })
