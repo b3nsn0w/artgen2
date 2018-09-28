@@ -9,6 +9,8 @@ const input = document.querySelector('#art-name')
 const canvas = document.querySelector('#art-canvas')
 const context = canvas.getContext('2d')
 
+const uiContainer = document.querySelector('#ui-container')
+
 const pos = { x: 0, y: 0 }
 
 function updateArt () {
@@ -44,13 +46,17 @@ updateArt()
 const mouse = { x: 0, y: 0 }
 let dragging = false
 
-canvas.addEventListener('mousedown', (event) => {
+uiContainer.addEventListener('mousedown', (event) => {
+  if (event.target !== uiContainer) return
+
   mouse.x = event.clientX
   mouse.y = event.clientY
   dragging = true
+
+  event.preventDefault()
 })
 
-canvas.addEventListener('mousemove', (event) => {
+uiContainer.addEventListener('mousemove', (event) => {
   if (!dragging) return
 
   const deltaX = event.clientX - mouse.x
@@ -65,10 +71,10 @@ canvas.addEventListener('mousemove', (event) => {
   updateArt()
 })
 
-canvas.addEventListener('mouseup', (event) => {
+uiContainer.addEventListener('mouseup', (event) => {
   dragging = false
 })
 
-canvas.addEventListener('mouseleave', (event) => {
+uiContainer.addEventListener('mouseleave', (event) => {
   dragging = false
 })
