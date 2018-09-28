@@ -1,6 +1,6 @@
 import random from '../lib/random'
 import palette from '../lib/palette'
-import shapes from '../lib/shapes'
+import fractal from '../lib/fractal'
 
 import './index.styl'
 
@@ -9,12 +9,9 @@ const input = document.querySelector('#art-name')
 const canvas = document.querySelector('#art-canvas')
 const context = canvas.getContext('2d')
 
-input.addEventListener('keyup', updateShape)
-input.addEventListener('change', updateShape)
-window.addEventListener('resize', updateShape)
-updateShape()
+const pos = { x: 0, y: 0 }
 
-function updateShape () {
+function updateArt () {
   const generator = random(input.value)
   const artPalette = palette(generator, 'main-palette')
 
@@ -23,32 +20,55 @@ function updateShape () {
 
   context.clearRect(0, 0, w, h)
 
-  // const stripeWidth = w / artPalette.length
-
-  // artPalette.map((value, index) => {
-  //   context.fillStyle = value.css
-  //   context.fillRect(stripeWidth * index, 0, stripeWidth, h)
-  // })
-
   const backgroundColor = generator.from('background-color', artPalette)
 
   context.fillStyle = backgroundColor.css
   context.fillRect(0, 0, w, h)
 
-  const shape = shapes(generator, 'demo-shape')
+  const midpoint = { x: w / 2, y: h / 2 }
 
-  shape.render({
+  fractal(generator, 'demo fractal').render({
     canvas,
     context,
-    origin: { x: w / 2, y: h / 2 },
-    scale: Math.min(w, h) * 0.4,
+    origin: { x: midpoint.x + pos.x, y: midpoint.y + pos.y },
+    scale: Math.min(w, h) * 2,
     palette: artPalette
   })
-
-  context.font = `${Math.ceil(h / 10)}px sans-serif`
-  const offset = context.measureText(shape.name).width
-  const margin = Math.min(w, h) * 0.05
-
-  context.fillStyle = generator.from('text-color', artPalette).css
-  context.fillText(shape.name, w - margin - offset, h - margin)
 }
+
+input.addEventListener('keyup', updateArt)
+input.addEventListener('change', updateArt)
+window.addEventListener('resize', updateArt)
+updateArt()
+
+const mouse = { x: 0, y: 0 }
+let dragging = false
+
+canvas.addEventListener('mousedown', (event) => {
+  mouse.x = event.clientX
+  mouse.y = event.clientY
+  dragging = true
+})
+
+canvas.addEventListener('mousemove', (event) => {
+  if (!dragging) return
+
+  const deltaX = event.clientX - mouse.x
+  const deltaY = event.clientY - mouse.y
+
+  mouse.x = event.clientX
+  mouse.y = event.clientY
+
+  pos.x += deltaX
+  pos.y += deltaY
+
+  updateArt()
+})
+
+canvas.addEventListener('mouseup', (event) => {
+  dragging = false
+})
+
+canvas.addEventListener('mouseleave', (event) => {
+  dragging = false
+})
