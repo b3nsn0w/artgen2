@@ -1,6 +1,4 @@
-import random from '../lib/random'
-import palette from '../lib/palette'
-import fractal from '../lib/fractal'
+import art from '../index'
 
 import './index.styl'
 
@@ -11,32 +9,21 @@ const context = canvas.getContext('2d')
 
 const uiContainer = document.querySelector('#ui-container')
 
-const pos = { x: 0, y: 0 }
-const zoom = { level: 1, step: 2 }
+let currentArt = art(input.value)
 
 function updateArt () {
-  const generator = random(input.value)
-  const artPalette = palette(generator, 'main-palette')
+  if (input.value !== currentArt.name) currentArt = art(input.value)
 
-  const w = canvas.width = canvas.clientWidth
-  const h = canvas.height = canvas.clientHeight
+  canvas.width = canvas.clientWidth
+  canvas.height = canvas.clientHeight
 
-  context.clearRect(0, 0, w, h)
+  if (currentArt.background.luminance < 0.5) uiContainer.classList.add('ui-container--dark')
+  else uiContainer.classList.remove('ui-container--dark')
 
-  const backgroundColor = generator.from('background-color', artPalette)
-
-  context.fillStyle = backgroundColor.css
-  context.fillRect(0, 0, w, h)
-
-  const midpoint = { x: w / 2, y: h / 2 }
-
-  fractal(generator, 'demo fractal').render({
+  currentArt.render({
     canvas,
     context,
-    origin: { x: midpoint.x + pos.x, y: midpoint.y + pos.y },
-    scale: Math.min(w, h),
-    palette: artPalette,
-    zoom: zoom.level
+    scale: 1
   })
 }
 
@@ -68,9 +55,7 @@ uiContainer.addEventListener('mousemove', (event) => {
   mouse.x = event.clientX
   mouse.y = event.clientY
 
-  pos.x += deltaX
-  pos.y += deltaY
-
+  currentArt.translate(-deltaX, -deltaY)
   updateArt()
 })
 
@@ -86,6 +71,8 @@ uiContainer.addEventListener('mouseleave', (event) => {
 
 uiContainer.addEventListener('wheel', (event) => {
   const zoomScale = Math.min(canvas.width, canvas.height) / 2
-  zoom.level += -event.deltaY * [1, 12, 200][event.deltaMode] / zoomScale
+  const zoom = -event.deltaY * [1, 12, 200][event.deltaMode] / zoomScale
+
+  currentArt.zoom(zoom)
   updateArt()
 })

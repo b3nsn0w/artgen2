@@ -9,10 +9,10 @@ _Artgen 2: Inception_ is a continuation of the [modern art generator](https://b3
 - [x] shape generator
   - [ ] more shapes
 - [x] shape rendering
-- [ ] art fractal
+- [x] art fractal
   - [x] basic fractal layers
-  - [ ] autolayering
-  - [ ] fractal zoom
+  - [x] autolayering
+  - [x] fractal zoom
 - [ ] a million other things
 - [x] webpack setup
 
