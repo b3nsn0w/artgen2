@@ -13,7 +13,12 @@ _Artgen 2: Inception_ is a continuation of the [modern art generator](https://b3
   - [x] basic fractal layers
   - [x] autolayering
   - [x] fractal zoom
-- [ ] a million other things
+- [x] optimization
+- [ ] a million other things, for example
+  - [ ] actual ui
+  - [ ] mouse-zoom instead of center-zoom
+  - [ ] deep linking
+  - [ ] export
 - [x] webpack setup
 
 Everything is subject to change. _Everything._ Even this sentence.
