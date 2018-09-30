@@ -6,7 +6,7 @@ function art (seed, options = {}) {
   const gen = seed.isGen ? seed : random(seed)
 
   const artPalette = palette(gen, 'art-palette')
-  const artFractal = fractal(gen, 'art-fractal')
+  const artFractal = fractal(gen, 'art-fractal', artPalette)
 
   const origin = options.origin || { x: 0, y: 0 }
   const zoom = { level: options.zoom || 1, step: artFractal.zoomStep }
@@ -23,7 +23,6 @@ function art (seed, options = {}) {
       canvas,
       context,
       scale: Math.min(canvas.width, canvas.height) * scale,
-      palette: artPalette,
       origin,
       zoom: zoom.level
     })
