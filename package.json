@@ -1,6 +1,6 @@
 {
   "name": "artgen",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "You see, the deconstruction is inextricable from not only the text, but also the self",
   "main": "src/index.js",
   "directories": {
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/b3nsn0w/artgen2#readme",
   "dependencies": {
     "babel-core": "^6.26.3",
+    "murmur-random": "^1.1.0",
     "murmurhash": "0.0.2"
   },
   "devDependencies": {

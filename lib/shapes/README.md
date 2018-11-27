@@ -1,8 +1,8 @@
 All shapes must export the following API:
 
-## `shape(gen, name)`
+## `shape(gen, palette)`
 
-This is the constructor of the shape. `gen` is the current random generator and `name` is the name object of the shape.
+This is the constructor of the shape, where `gen` is the current random generator and `palette` is the current art's palette.
 
 Returns a shape object with the following properties:
 
@@ -14,7 +14,7 @@ Renders the shape to a given canvas. The passed `opts` object has the following 
  - `opts.context`: a 2d context to the canvas
  - `opts.origin`: a point in the format of `{x, y}`, the origin of the shape
  - `opts.scale`: the size of the shape, from the origin in all directions
- - `opts.palette`: the current palette
+ - `opts.palette`: the current palette (deprecated, see constructor)
 
 ### `shape.name`
 
