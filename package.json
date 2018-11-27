@@ -1,6 +1,6 @@
 {
   "name": "artgen",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "You see, the deconstruction is inextricable from not only the text, but also the self",
   "main": "src/index.js",
   "directories": {
